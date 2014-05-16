@@ -5,7 +5,7 @@
     <version>1.0.0-beta2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>crash.distrib</artifactId>
+  <artifactId>jcr.distrib</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-beta2-SNAPSHOT</version>
 
