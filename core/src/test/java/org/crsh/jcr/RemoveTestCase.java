@@ -27,7 +27,7 @@ public class RemoveTestCase extends AbstractJCRCommandTestCase {
 
   public void testRm() throws Exception {
     assertLogin();
-    assertFalse(((Session)shell.get("session")).hasPendingChanges());
+    assertFalse(((Session)session.get("session")).hasPendingChanges());
 
     // Try relative
     groovyShell.evaluate("session.rootNode.addNode('foo').addNode('bar');");

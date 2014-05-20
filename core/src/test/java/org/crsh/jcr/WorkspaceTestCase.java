@@ -25,7 +25,7 @@ public class WorkspaceTestCase extends AbstractJCRCommandTestCase {
 
   public void testRootConnect() throws Exception {
     assertOk("ws login -u root -p exo ws");
-    assertNotNull(shell.get("session"));
-    assertEquals(new Path("/"), shell.get("currentPath"));
+    assertNotNull(session.get("session"));
+    assertEquals(new Path("/"), session.get("currentPath"));
   }
 }

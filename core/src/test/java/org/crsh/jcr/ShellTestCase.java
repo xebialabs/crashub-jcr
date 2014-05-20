@@ -28,21 +28,21 @@ public class ShellTestCase extends AbstractJCRCommandTestCase {
 
   public void testCommit() throws Exception {
     assertLogin();
-    assertFalse(((Session)shell.get("session")).hasPendingChanges());
+    assertFalse(((Session)session.get("session")).hasPendingChanges());
     groovyShell.evaluate("session.rootNode.addNode('added_node');");
-    assertTrue(((Session)shell.get("session")).hasPendingChanges());
+    assertTrue(((Session)session.get("session")).hasPendingChanges());
     assertOk("commit");
-    assertFalse(((Session)shell.get("session")).hasPendingChanges());
+    assertFalse(((Session)session.get("session")).hasPendingChanges());
     assertEquals(true, groovyShell.evaluate("return session.rootNode.hasNode('added_node')"));
   }
 
   public void testRollback() throws Exception {
     assertLogin();
-    assertFalse(((Session)shell.get("session")).hasPendingChanges());
+    assertFalse(((Session)session.get("session")).hasPendingChanges());
     groovyShell.evaluate("session.rootNode.addNode('foo');");
-    assertTrue(((Session)shell.get("session")).hasPendingChanges());
+    assertTrue(((Session)session.get("session")).hasPendingChanges());
     assertOk("rollback");
-    assertFalse(((Session)shell.get("session")).hasPendingChanges());
+    assertFalse(((Session)session.get("session")).hasPendingChanges());
     assertEquals(false, groovyShell.evaluate("return session.rootNode.hasNode('foo')"));
   }
 

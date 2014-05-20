@@ -21,7 +21,7 @@ package org.crsh.jcr;
 
 import org.crsh.cli.descriptor.CommandDescriptor;
 import org.apache.sshd.server.Command;
-import org.crsh.cli.CLIException;
+import org.crsh.cli.impl.CLIException;
 import org.crsh.cli.impl.lang.CommandFactory;
 import org.crsh.cli.impl.invocation.InvocationMatch;
 import org.crsh.cli.impl.invocation.InvocationMatcher;

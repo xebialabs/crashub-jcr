@@ -32,27 +32,27 @@ public class CdTestCase extends AbstractJCRCommandTestCase {
 
     //
     assertOk("cd foo");
-    assertEquals(new Path("/foo"), shell.get("currentPath"));
+    assertEquals(new Path("/foo"), session.get("currentPath"));
     assertOk("cd ..");
-    assertEquals(new Path("/"), shell.get("currentPath"));
+    assertEquals(new Path("/"), session.get("currentPath"));
     assertOk("cd /foo");
-    assertEquals(new Path("/foo"), shell.get("currentPath"));
+    assertEquals(new Path("/foo"), session.get("currentPath"));
     assertOk("cd .");
-    assertEquals(new Path("/foo"), shell.get("currentPath"));
+    assertEquals(new Path("/foo"), session.get("currentPath"));
     assertOk("cd");
-    assertEquals(new Path("/"), shell.get("currentPath"));
+    assertEquals(new Path("/"), session.get("currentPath"));
 
     //
     assertOk("cd 'foo bar'");
-    assertEquals(new Path("/foo bar"), shell.get("currentPath"));
+    assertEquals(new Path("/foo bar"), session.get("currentPath"));
     assertOk("cd ..");
-    assertEquals(new Path("/"), shell.get("currentPath"));
+    assertEquals(new Path("/"), session.get("currentPath"));
     assertOk("cd '/foo bar'");
-    assertEquals(new Path("/foo bar"), shell.get("currentPath"));
+    assertEquals(new Path("/foo bar"), session.get("currentPath"));
     assertOk("cd .");
-    assertEquals(new Path("/foo bar"), shell.get("currentPath"));
+    assertEquals(new Path("/foo bar"), session.get("currentPath"));
     assertOk("cd");
-    assertEquals(new Path("/"), shell.get("currentPath"));
+    assertEquals(new Path("/"), session.get("currentPath"));
   }
 
 }
