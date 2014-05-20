@@ -22,12 +22,12 @@
   <parent>
     <artifactId>jcr.parent</artifactId>
     <groupId>org.crashub</groupId>
-    <version>1.0.0-beta3-SNAPSHOT</version>
+    <version>1.0.0-beta3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jcr.doc</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-beta3-SNAPSHOT</version>
+  <version>1.0.0-beta3</version>
 
   <name>CRaSH JCR Doc</name>
   <description>The CRaSH JCR documentation</description>
