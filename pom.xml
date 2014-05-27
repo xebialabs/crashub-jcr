@@ -4,7 +4,7 @@
   <groupId>org.crashub</groupId>
   <artifactId>jcr.parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0-beta4-SNAPSHOT</version>
+  <version>1.0.0-beta4</version>
 
   <parent>
     <groupId>org.sonatype.oss</groupId>
@@ -93,25 +93,25 @@
       <dependency>
         <groupId>org.crashub</groupId>
         <artifactId>jcr.core</artifactId>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
       <dependency>
         <groupId>org.crashub</groupId>
         <artifactId>jcr.core</artifactId>
         <classifier>standalone</classifier>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
       <dependency>
         <groupId>org.crashub</groupId>
         <artifactId>jcr.core</artifactId>
         <type>test-jar</type>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
       <dependency>
         <groupId>org.crashub</groupId>
         <artifactId>jcr.core</artifactId>
         <type>war</type>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
 
       <!-- -->
@@ -119,7 +119,7 @@
         <groupId>org.crashub</groupId>
         <artifactId>jcr.jackrabbit</artifactId>
         <type>war</type>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
 
       <!-- -->
@@ -127,7 +127,7 @@
         <groupId>org.crashub</groupId>
         <artifactId>jcr.exo</artifactId>
         <type>war</type>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
 
       <!-- -->
@@ -136,7 +136,7 @@
         <artifactId>jcr.doc</artifactId>
         <classifier>html</classifier>
         <type>zip</type>
-        <version>1.0.0-beta4-SNAPSHOT</version>
+        <version>1.0.0-beta4</version>
       </dependency>
 
       <!-- -->
