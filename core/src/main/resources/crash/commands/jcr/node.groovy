@@ -1,3 +1,5 @@
+import org.crsh.cli.Named
+
 import javax.jcr.ImportUUIDBehavior
 import javax.jcr.Node;
 import org.crsh.cli.Usage
@@ -213,6 +215,7 @@ Imports a node from an nt:file node located in the workspace:
 [/]% importnode /gadgets.xml /
 Node imported
 """)
+  @Named("import")
   public Object IMPORT(
     @Required @Argument @Usage("the source path") @Man("The path of the imported nt:file node") Path source,
     @Required @Argument @Usage("the target path")  @Man("The path of the parent imported node") Path target) {
