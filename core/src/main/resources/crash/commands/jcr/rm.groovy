@@ -33,21 +33,19 @@ rm is a <Node,Void> command removing all the consumed nodes.""")
       @Override
       void open() {
         foo << 'Removed nodes ';
-        if (!isPiped()) {
-          // First collect nodes
-          def nodes = [];
-          paths.each { path ->
-            def node = getNodeByPath(path);
-            if (node == null)
-              throw new ScriptException("Node path does not exist");
-            nodes.add(node);
-          };
-          // Then remove if we have been able to find them all
-          nodes.each { node ->
-            foo << " $node.path";
-            node.remove();
-          };
-        }
+        // First collect nodes
+        def nodes = [];
+        paths.each { path ->
+          def node = getNodeByPath(path);
+          if (node == null)
+            throw new ScriptException("Node path does not exist");
+          nodes.add(node);
+        };
+        // Then remove if we have been able to find them all
+        nodes.each { node ->
+          foo << " $node.path";
+          node.remove();
+        };
       }
 
       @Override

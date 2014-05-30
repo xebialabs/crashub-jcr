@@ -20,8 +20,8 @@ them and producing nodes that were moved.
 
 
   public Pipe<Node, Node> main(
-    @Argument @Usage("the source path") @Man("The path of the source node to move, absolute or relative") Path source,
-    @Argument @Usage("the target path") @Man("The destination path absolute or relative") Path target) {
+    @Argument @Usage("the source paths") @Man("The path of the source nodes to move, absolute or relative") List<Path> sources,
+    @Argument @Usage("the destination path") @Man("The destination path absolute or relative") Path destination) {
     assertConnected()
 
     // Resolve JCR session
@@ -29,28 +29,22 @@ them and producing nodes that were moved.
     return new Pipe<Node, Node>() {
       @Override
       void open() {
-        if (!isPiped()) {
-          def sourceNode = findNodeByPath(source);
-          def targetPath = absolutePath(target);
-          sourceNode.session.workspace.move(sourceNode.path, targetPath.value);
-          def targetNode = findNodeByPath(targetPath);
+        sources.each { src ->
+          def srcNode = findNodeByPath(src);
+          def dstPath = absolutePath(destination);
+          srcNode.session.workspace.move(srcNode.path, dstPath.value);
+          def targetNode = findNodeByPath(dstPath);
           context.provide(targetNode);
         }
       }
       @Override
-      void provide(Node node) {
-        def targetParent = findNodeByPath(source);
-        def targetPath = targetParent.path + "/" + node.name;
-        session.workspace.move(node.path, targetPath);
-        context.provide(node);
+      void provide(Node src) {
+        def dstPath = absolutePath(destination);
+        def dstParent = findNodeByPath(dstPath);
+        def targetPath = dstParent.path + "/" + src.name;
+        session.workspace.move(src.path, targetPath);
+        context.provide(src);
       }
     }
-//
-//    //
-//    if (context.piped) {
-//      if (target != null)
-//        throw new ScriptException("Only one argument is permitted when involved in a pipe");
-//    } else {
-//    }
   }
 }

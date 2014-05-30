@@ -73,41 +73,38 @@ The addnode command is a <Void,Node> command that produces all the nodes that we
   }
 
   @Command
-  @Usage("set a property on the current node")
+  @Usage("set a property on nodes")
   @Man("""\
 The set command updates the property of a node.
 
 Create or destroy property foo with the value bar on the root node:
 
-[/]% set foo bar
+[/]% set / foo bar
 Property created
 
 Update the existing foo property:
 
-[/]% set foo juu
+[/]% set / foo juu
 
 When a property is created and does not have a property descriptor that constraint its type,
 you can specify it with the -t option
 
 [/]% set -t LONG long_property 3
 
-Remove a property
-
-[/]% set foo
-
-set is a <Node,Void> command updating the property of the consumed node stream.""")
+set is a <Node,Node> command updating the property of the consumed node stream.""")
   public Pipe<Node, Node> set(
-    @Argument @Usage("the property name") @Man("The name of the property to alter") String propertyName,
-    @Argument @Usage("the property value") @Man("The new value of the property") String propertyValue,
+    @Argument @Usage("the node paths to set") @Man("The source nodes to move, absolute or relative") List<Path> path,
+    @Argument @Usage("the property name") @Man("The name of the property to alter") @Required String propertyName,
+    @Argument @Usage("the property value") @Man("The new value of the property") @Required String propertyValue,
     @Option(names=["t","type"]) @Usage("the property type") @Man("The property type to use when it cannot be inferred") PropertyType propertyType) {
     propertyType = propertyType ?: PropertyType.STRING;
     return new Pipe<Node, Node>() {
       @Override
       void open() {
-        if (!isPiped()) {
-          // Operate on current node
-          def node = getCurrentNode();
+        path.each { source ->
+          def node = findNodeByPath(source);
           update(node, propertyName, propertyValue, propertyType);
+          context.provide(node)
         }
       }
 
@@ -148,6 +145,42 @@ set is a <Node,Void> command updating the property of the consumed node stream."
         }
       }
     }
+  }
+
+  @Command
+  @Usage("remove a property on nodes")
+  @Man("""\
+The unset command removes the property of a node.
+
+[/]% unset / foo
+
+unset is a <Node,Void> command updating the property of the consumed node stream.""")
+  public Pipe<Node, Node> unset(
+      @Argument @Usage("the node paths to set") @Man("The source nodes to move, absolute or relative") List<Path> path,
+      @Argument @Usage("the property name") @Man("The name of the property to remove") @Required String propertyName) {
+    return new Pipe<Node, Node>() {
+      @Override
+      void open() {
+        path.each { source ->
+          def node = findNodeByPath(source);
+          unset(node);
+          context.provide(node)
+        }
+      }
+
+      @Override
+      void provide(Node node) {
+        unset(node);
+        context.provide(node)
+      }
+
+      private void unset(Node node) {
+        if (node.hasProperty(propertyName)) {
+          node.getProperty(propertyName).remove()
+        }
+      }
+
+    };
   }
 
   @Command

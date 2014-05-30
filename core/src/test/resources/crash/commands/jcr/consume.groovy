@@ -6,14 +6,12 @@ import javax.jcr.Node;
 public class consume {
   @Command
   @Usage("collects and log a set of nodes")
-  public Pipe<Object, String> main() {
-    return new Pipe<Object, String>() {
+  public Pipe<Node, String> main() {
+    return new Pipe<Node, String>() {
       @Override
-      void provide(Object element) {
-        if (element instanceof Node) {
-          Node node = (Node)element;
-          out.println(node.path);
-        }
+      void provide(Node element) {
+        Node node = (Node)element;
+        out.println(node.path);
       }
     }
   }
