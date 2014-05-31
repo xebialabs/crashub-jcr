@@ -60,7 +60,6 @@ public class AddNodeTestCase extends AbstractJCRCommandTestCase {
 
   public void testProduce() throws Exception {
     assertLogin();
-    assertEquals("Node/foo\n" +
-        " /foo created", assertOk("node add foo | consume"));
+    assertEquals("/foo\n", assertOk("node add foo | consume"));
   }
 }
