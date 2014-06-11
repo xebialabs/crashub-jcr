@@ -22,7 +22,7 @@ package org.crsh.jcr;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestSuite;
 import org.crsh.jcr.groovy.NodeMetaClassTestCase;
-import org.crsh.shell.AbstractCommandTestCase;
+import org.crsh.shell.AbstractShellTestCase;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-public abstract class AbstractJCRCommandTestCase extends AbstractCommandTestCase {
+public abstract class AbstractJCRCommandTestCase extends AbstractShellTestCase {
   
   public static TestSuite createTestSuite() {
     TestSuite suite = new TestSuite();
