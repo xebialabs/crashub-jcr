@@ -19,63 +19,12 @@
 
 package org.crsh.jcr;
 
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 abstract class FileSystemAction {
 
   /** . */
   private static final Logger log = Logger.getLogger(FileSystemAction.class.getName());
-
-  public static void read(SCPCommand cmd, FileSystem fs) throws IOException {
-    cmd.ack();
-    log.log(Level.FINE, "Want to read line");
-    String line = cmd.readLine();
-    log.log(Level.FINE, "Read line " + line);
-    FileSystemAction action = decode(line);
-    log.log(Level.FINE, "Action: " + action);
-    read(cmd, action, fs);
-  }
-
-  private static void read(final SCPCommand cmd, FileSystemAction action, FileSystem fs) throws IOException {
-    if (action instanceof StartDirectory) {
-      String directoryName = ((StartDirectory)action).name;
-      fs.beginDirectory(directoryName);
-
-      //
-      cmd.ack();
-
-      //
-      while (true) {
-        String nextLine = cmd.readLine();
-        FileSystemAction nextAction = decode(nextLine);
-        log.log(Level.FINE, "Next action: " + nextAction);
-        if (nextAction instanceof FileSystemAction.EndDirectory) {
-          fs.endDirectory(directoryName);
-          break;
-        } else {
-          read(cmd, nextAction, fs);
-        }
-      }
-
-      //
-      cmd.ack();
-    } else if (action instanceof File) {
-      File file = (File)action;
-
-      //
-      cmd.ack();
-
-      //
-      fs.file(file.name, file.length, cmd.read(file.length));
-
-      //
-      log.log(Level.FINE, "About to send ack for file");
-      cmd.ack();
-      cmd.readAck();
-    }
-  }
 
   private static FileSystemAction decode(String line) {
     if (line == null) {
