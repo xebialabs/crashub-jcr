@@ -32,9 +32,13 @@ public abstract class JCRPlugin<T extends JCRPlugin> extends CRaSHPlugin<T> {
 
   public static Repository findRepository(Map<String, String> properties) throws Exception {
     for (JCRPlugin plugin : ServiceLoader.load(JCRPlugin.class)) {
-      Repository repository = plugin.getRepository(properties);
-      if (repository != null) {
-        return repository;
+      try {
+        Repository repository = plugin.getRepository(properties);
+        if (repository != null) {
+          return repository;
+        }
+      } catch (Exception ex) {
+        // ignore
       }
     }
     return null;
