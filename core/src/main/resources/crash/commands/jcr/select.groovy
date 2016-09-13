@@ -94,7 +94,7 @@ select is a <Void,Node> command producing all the matched nodes.""")
     query.each { statement += " " + it };
 
     //
-    def select = queryMgr.createQuery(statement, Query.SQL);
+    def select = queryMgr.createQuery(statement, Query.JCR_SQL2);
     def result = select.execute();
     def nodes = result.nodes;
     def total = nodes.size;
