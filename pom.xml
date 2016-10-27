@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.crashub</groupId>
+
+    <groupId>com.xebialabs.crash</groupId>
     <artifactId>jcr.parent</artifactId>
     <packaging>pom</packaging>
     <version>1.1.1-SNAPSHOT</version>
@@ -11,12 +13,12 @@
     </prerequisites>
 
     <name>CRaSH JCR Extension</name>
-    <description>CRaSH extension for managing and connecting to Java Content Repository servers</description>
+    <description>CRaSH extension for managing and connecting to Java Content Repository servers. Forked from CRaSH JCR extension.</description>
     <url>http://www.crashub.org/</url>
 
     <organization>
-        <name>eXo Platform SAS</name>
-        <url>http://www.exoplatform.com</url>
+        <name>XebiaLabs</name>
+        <url>http://www.xebialabs.com</url>
     </organization>
 
     <licenses>
@@ -30,13 +32,13 @@
         <connection>scm:git:git://github.com/xebialabs/crashub-jcr.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:xebialabs/crashub-jcr.git</developerConnection>
         <url>https://github.com/xebialabs/crashub-jcr</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
-            <id>xebialabs-releases</id>
-            <url>https://nexus.xebialabs.com/nexus/content/repositories/releases</url>
+            <id>xebialabs-thirdparty</id>
+            <url>https://nexus.xebialabs.com/nexus/content/repositories/thirdparty</url>
         </repository>
         <snapshotRepository>
             <id>xebialabs-snapshots</id>
@@ -73,6 +75,14 @@
             <id>ehugonnet</id>
             <name>Emmanuel Hugonnet</name>
             <email>emmanuel.hugonnet@silverpeas.com</email>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ilx</id>
+            <name>Ivica Loncar</name>
+            <email>iloncar+ml@gmail.com</email>
             <roles>
                 <role>Contributor</role>
             </roles>
@@ -421,6 +431,16 @@
             </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.2</version>
+                        <configuration>
+                            <arguments>-Drelease-active=true</arguments>
+                            <stagingRepository>xebialabs-thridparty::default::https://nexus.xebialabs.com/nexus/content/repositories/thirdparty</stagingRepository>
+                            <releaseProfiles>enforce-rules</releaseProfiles>
+                        </configuration>
+                    </plugin>
                     <!-- Release with Java 8 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -465,18 +485,22 @@
                     <id>maven2-repository.dev.java.net</id>
                     <url>http://download.java.net/maven/2/</url>
                 </repository>
+                <!--
                 <repository>
                     <id>repository.exoplatform.org</id>
                     <url>http://repository.exoplatform.org/public</url>
                 </repository>
+                -->
             </repositories>
 
+        <!--
             <pluginRepositories>
                 <pluginRepository>
                     <id>repository.exoplatform.org</id>
                     <url>http://repository.exoplatform.org/public</url>
                 </pluginRepository>
             </pluginRepositories>
+        -->
         </profile>
 
         <!--
