@@ -30,7 +30,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/xebialabs/crashub-jcr.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:xebialabs/crashub-jcr.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/xebialabs/crashub-jcr.git</developerConnection>
         <url>https://github.com/xebialabs/crashub-jcr</url>
         <tag>HEAD</tag>
     </scm>
