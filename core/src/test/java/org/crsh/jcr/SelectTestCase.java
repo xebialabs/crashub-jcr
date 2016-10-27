@@ -30,7 +30,7 @@ public class SelectTestCase extends AbstractJCRCommandTestCase {
     assertLogin();
     groovyShell.evaluate("session.rootNode.addNode('foo').setProperty('bar','juu');");
     groovyShell.evaluate("session.save();");
-    String produced = assertOk("select * from nt:base where bar = 'juu' | consume");
+    String produced = assertOk("select * from [nt:base] where bar = 'juu' | consume");
     assertEquals("/foo\n", produced);
   }
 }

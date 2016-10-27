@@ -92,7 +92,7 @@ public class ShellTestCase extends AbstractJCRCommandTestCase {
     assertLogin();
     groovyShell.evaluate("session.rootNode.addNode('foo').setProperty('bar','juu');");
     groovyShell.evaluate("session.save();");
-    assertOk("select * from nt:base where bar = 'juu' | rm");
+    assertOk("select * from [nt:base] where bar = 'juu' | rm");
     assertFalse((Boolean)groovyShell.evaluate("return session.rootNode.hasNode('foo');"));
   }
 
