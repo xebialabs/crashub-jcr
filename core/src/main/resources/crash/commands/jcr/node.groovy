@@ -120,7 +120,7 @@ set is a <Node,Node> command updating the property of the consumed node stream."
     // Set the property
     if (propertyValue != null && node.hasProperty(propertyName)) {
       // If the current node has already a property, we just update it
-      node[propertyName] = propertyValue;
+      propertyType.set(node, propertyName, propertyValue)
     } else {
 
       // Otherwise we try to create it
